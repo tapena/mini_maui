@@ -13,7 +13,7 @@ class Api::KidsController < ApplicationController
                   description: params[:description]
                   )
     @kid.save
-    render 'create.json.jbuilder'
+    render 'show.json.jbuilder'
   end  
 
   def show
