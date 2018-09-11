@@ -20,4 +20,16 @@ class Api::KidsController < ApplicationController
     @kid = Kid.find(params[:id])
     render 'show.json.jbuilder'
   end
+
+  def update
+    @kid = Kid.find(params[:id])
+
+    @kid.name = params[:name],
+    @kid.price = params[:price],
+    @kid.image_url = params[:image_url],
+    @kid.description = params[:description]
+
+    @kid.save
+    render "show.json.jbuilder"
+  end  
 end
