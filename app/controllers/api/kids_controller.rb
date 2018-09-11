@@ -24,12 +24,19 @@ class Api::KidsController < ApplicationController
   def update
     @kid = Kid.find(params[:id])
 
-    @kid.name = params[:name],
-    @kid.price = params[:price],
-    @kid.image_url = params[:image_url],
-    @kid.description = params[:description]
+    @kid.name = params[:name] || @kid.name
+    @kid.price = params[:price] || @kid.price
+    @kid.image_url = params[:image_url] || @kid.image_url
+    @kid.description = params[:description] || @kid.description
 
     @kid.save
     render "show.json.jbuilder"
+  end
+
+  def destroy 
+    @kid = Kid.find(params[:id])
+    @kid.destroy
+    render json: {message: "Destroyed"}
   end  
+
 end
