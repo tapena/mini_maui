@@ -1,22 +1,23 @@
 class Api::KidsController < ApplicationController
 
-  def all_kids_action
+  def index
     @kids = Kid.all
-    render 'all_kids_view.json.jbuilder'
+    render 'index.json.jbuilder'
   end  
 
-  def first_kid_action
-    @kid = Kid.first
-    render 'first_kid.json.jbuilder'
+  def create
+    @kid = Kid.new(
+                  name: params[:name],
+                  price: params[:price],
+                  image_url: params[:image_url],
+                  description: params[:description]
+                  )
+    @kid.save
+    render 'create.json.jbuilder'
+  end  
+
+  def show
+    @kid = Kid.find(params[:id])
+    render 'show.json.jbuilder'
   end
-
-  def second_kid_action
-    @kid = Kid.find_by(id: 2)
-    render 'second_kid.json.jbuilder'
-  end 
-
-  def third_kid_action
-    @kid = Kid.find_by(id: 3)
-    render 'third_kid.json.jbuilder'
-  end 
 end
